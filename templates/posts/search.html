@@ -12,14 +12,27 @@
            font-size: 16px;
        }
    </style>
-  <div class="col-lg-5 col-md-10 col-sm-12 mx-auto mt-3">
+  <div class="col-lg-5 col-md-10 col-sm-12 mx-auto mt-5 mb-5">
   <h2>Search result : {{query}}</h2>
   {% if searchs|length < 1 %}
   <p class="srh">No Search Found:</p> 
   <p class="srh">Your search query : <b class="font-weight-bold">{{query}}</b> did not macth any doucment ...</p>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   {% endif %}
 {% for post in searchs %}
-<div class="user-posts mt-5">
+<div class="user-posts card mt-5">
 <div class="user-post-detail d-flex">
 <img src="{{ post.author.profile_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
 <div class="user-name-date">

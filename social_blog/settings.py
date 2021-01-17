@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import cloudinary_storage
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '=no-$-nut_1u*h45%fb)h^zdno@^j69rohkm$9r!cue15u2pue'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = False
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['social-blog1.herokuapp.com','localhost','127.0.0.1']
 
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'social.apps.SocialConfig',
     'profiles.apps.ProfilesConfig',
     'django_countries',
+    'cloudinary_storage',
+    'cloudinary',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -140,6 +143,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'social-blog',
+    'API_KEY': '628728632466762',
+    'API_SECRET': 'EspiWcgcD3CVlRapNFWObpHNZiE'
+}
+
 
 
 STATIC_URL = '/static/'
@@ -152,6 +161,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn","static_root")
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn","media_root")
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

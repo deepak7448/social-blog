@@ -22,7 +22,7 @@ class Profiles(models.Model):
                          unique_with=['user',],
                          slugify=custom_slugify,
                          always_update=True)
-    profile_pic = models.ImageField(default="profile/male.svg",upload_to='profile/',blank=False,) 
+    profile_pic = models.ImageField(default="profile/male_jmfdfj.svg",upload_to='profile/',blank=False,) 
     #cover_pic = models.ImageField(default="cover/background.svg",upload_to='cover/',blank=True,validators=[FileExtensionValidator(['png','jpg','jpeg','svg'])]) 
     bio = models.TextField(max_length = "200",blank=True, null=True)
     country = CountryField(default='IN')

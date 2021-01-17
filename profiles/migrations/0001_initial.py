@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('slug', autoslug.fields.AutoSlugField(always_update=True, editable=False, populate_from='user', slugify=profiles.models.custom_slugify, unique_with=['user'])),
-                ('profile_pic', models.ImageField(blank=True, default='profile/male.svg', upload_to='profile/')),
+                ('profile_pic', models.ImageField(blank=True, default='profile/male_jmfdfj.svg', upload_to='profile/')),
                 ('bio', models.TextField(blank=True, max_length='200', null=True)),
                 ('country', django_countries.fields.CountryField(default='IN', max_length=2)),
                 ('facebook_url', models.URLField(blank=True)),
