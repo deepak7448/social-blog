@@ -1,0 +1,50 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+   {% block title %} <title>Search </title>{% endblock %}
+    {% block css %} 
+     <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    {% endblock %}
+   {% block content %}
+   <style>
+       .srh{
+           font-size: 16px;
+       }
+   </style>
+  <div class="col-lg-5 col-md-10 col-sm-12 mx-auto mt-3">
+  <h2>Search result : {{query}}</h2>
+  {% if searchs|length < 1 %}
+  <p class="srh">No Search Found:</p> 
+  <p class="srh">Your search query : <b class="font-weight-bold">{{query}}</b> did not macth any doucment ...</p>
+  {% endif %}
+{% for post in searchs %}
+<div class="user-posts mt-5">
+<div class="user-post-detail d-flex">
+<img src="{{ post.author.profile_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
+<div class="user-name-date">
+<h3 class="text-muted">
+<a href="{{ post.author.get_profile_url }}" class="text-muted title-size"> {{post.author|capfirst}}</a>
+</h3>
+<p class="text-muted">{{post.created_on|naturalday}} at {{post.created_on|time}}</p>
+</div>
+</div>
+<hr style="margin: 5px 0 10px 0;">
+<div class="post-section">
+<div class="post-title">
+<a href="{{ post.get_absolute_url }}" class="text-muted title-size card-title">{{post.title|capfirst}}</a>
+</div>  
+<div class="post-des mt-2"> 
+{{ post.content|safe|truncatewords:100 }}
+{% if post.image %}
+<a href="{{ post.get_absolute_url }}">
+<img src="{{ post.image.url }}" class='card-img-top ui centered medium image'/>
+</a>
+{% endif %}
+</div>
+</div>
+<br>
+</div>
+{% endfor %} 
+</div>
+ {% endblock %}

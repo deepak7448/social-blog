@@ -1,0 +1,48 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+   {% block title %} <title>Update post </title>{% endblock %}
+    {% block css %} 
+     <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    {% endblock %}
+   {% block content %}
+   {% if request.user == post.author.user %}
+   <div class="col-lg-6 col-md-6 col-sm-12 mx-auto">
+    <div class="post-body ui raised segment" style="margin-top: 4rem;">
+        <h3 class="text-center text-uppercase">Update Post</h3>
+        <hr>
+        <div class="post d-flex">
+            <p class="user-name ">{{user.username|capfirst}}</p>
+        </div>
+        <div class="content">
+            <div class="description ">
+                <form class="ui form post-form" method="POST"  enctype="multipart/form-data">
+                  {% csrf_token %}
+                    <div class="field">
+                        <label for="title">Title</label>
+                       {{form.title}}
+                    </div>
+                    <div class="field">
+                        <label for="post">What's on your Mind</label>
+                    {{form.content}}
+                  </div>
+                   {{form.image}}
+                    <button type="submit" class="positive ui button" style="font-size: 15px;border-radius:0">Update Post</button>
+                </form>
+            </div>
+        </div>
+         <form action="{% url 'posts:like' %}"  style="display: none;">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{post.id}}">
+            <button type="submit" class="ui primary button"><i class="far fa-heart"></i>Like</a>
+            </form>
+    </div>
+</div>
+{% else %}
+{% include 'error/404.html' %}
+{% endif %}
+
+<br>
+<br>
+   {% endblock %}

@@ -1,0 +1,14 @@
+{% block content %}
+<style>
+.jumbotron{
+box-shadow: none!important;
+}
+</style>
+<div class="jumbotron text-center">
+  <h1 class="display-4">403 FORBIDDEN</h1>
+  <p class="lead">NOT THIS TIME, ACCESS FORBIDDEN!</p>
+  <p class="lead">
+    <a class="ui button primary" href="{% url 'posts:home' %}" role="button">Home</a>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %} 
+{% load countries %}
+{% load crispy_forms_tags %}
+{% block title %} <title>Update profile </title>{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
+{% endblock %}
+{% block content %}
+<style>
+  .helptext{
+  font-size: 12px;
+  color: gray;
+}
+#id_profile_pic{
+  border:none;
+  padding: 0;
+  width: 60px;
+  margin-top: 20px;
+  margin-left: -50px;
+}
+#profile_pic-clear_id{
+  display:none;
+}
+.ui.form label[for=profile_pic-clear_id]{
+  display:none;
+}
+label {
+  margin-bottom: 0;
+}
+::-webkit-file-upload-button {
+  position: relative;
+  background: var(--main-color);
+  border: none;
+  color: var(--white-color);
+  cursor: pointer;
+  padding: 10px;
+  outline: none;
+  transition: all 130ms linear 0s!important;
+  -webkit-transition: all 130ms linear 0s!important;
+  -moz-transition: all 130ms linear 0s!important;
+  -ms-transition: all 130ms linear 0s!important;
+  -o-transition: all 130ms linear 0s!important;
+}
+
+::-webkit-file-upload-button:hover {
+  background: var(--main-hover);
+}
+
+::-webkit-file-upload-button:focus {
+  outline: none;
+}
+.profile-view{
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+    box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+    padding: 15px;
+  }
+</style>
+<br>
+{% if request.user == profiles.user %}
+ <div class="col-lg-5 col-md-7 col-sm-12 mx-auto mb-5">
+ <div class="profile-view mt-4">
+  <h2 class="text-uppercase text-center">Update Profile</h3>
+<form method="POST" enctype="multipart/form-data" class="ui form">
+  {% csrf_token %}
+  {{u_form.as_p}}
+  {{p_form.as_p}}
+   <button type="submit" class="positive ui button">Update Profile</button>
+</form>
+</div>
+</div>
+<br>
+{% else %}
+{% include 'error/404.html' %}
+{% endif %}
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/datepicker.js' %}"></script>
+<script src="{% static 'js/i18n/datepicker.en.js' %}"></script>
+<script>
+  $('#id_date_of_birth').datepicker({
+    language: 'en',
+    dateFormat: 'yyyy-m-dd',
+    maxDate: new Date(),
+    autoClose: true,
+});
+</script>
+{% endblock %}

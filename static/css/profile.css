@@ -1,0 +1,30 @@
+.ui.table td{
+    font-size: 14px!important;
+}
+.profile-view{
+    max-width: 55em!important;
+    margin: auto!important;
+    -webkit-box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+    box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+    padding: 15px;
+    display: flex;
+}
+@media only screen and (max-width: 767px){
+    .profile-view{
+        display: block;
+    }
+}
+/* @media only screen and (max-width: 767px){
+.ui.table:not(.unstackable) tbody, .ui.table:not(.unstackable) tr, .ui.table:not(.unstackable) tr > th, .ui.table:not(.unstackable) tr > td {
+    width: auto !important;
+    display: revert !important;
+    padding: 12px !important;
+}
+}
+.ui.table:not(.unstackable) tr > th, .ui.table:not(.unstackable) tr > td {
+    background: none;
+    border: none !important;
+    padding: 12px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+} */

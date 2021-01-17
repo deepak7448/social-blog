@@ -1,0 +1,88 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+   {% block title %} <title>Post details </title>{% endblock %}
+    {% block css %} 
+     <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    {% endblock %}
+   {% block content %}
+  <div class="col-lg-5 col-md-10 col-sm-12 mx-auto">
+            <div class="user-posts card mt-5">
+                <div class="user-post-detail d-flex">
+                    <img src="{{post.author.profile_pic.url}}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
+                    <div class="user-name-date">
+                        <h3 class="text-muted">
+                           {{post.author|capfirst}}
+                        </h3>
+                        <p class="text-muted">{{post.created_on|naturalday}} at {{post.created_on|time}}</p>
+                    </div>
+                    {% if request.user == post.author.user %}
+                    <div class="user-post-edit">
+                        <div class="ui buttons">
+                            <div class="ui floating dropdown icon button action-btn">
+                                <i class="ellipsis vertical icon"></i>
+                                <div class="menu">
+                                    <a href="{% url 'posts:update_post' slug=post.slug %}" class="item"><i class="edit icon"></i> Edit Post</a>
+                                    <a href="{% url 'posts:delete_post' slug=post.slug %}" class="item"><i class="trash icon"></i> Remove Post</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr style="margin: 5px 0 10px 0;">
+                <div class="post-section">
+                    <div class="post-title">
+                        <a class="text-muted title-size" href="#">{{post.title|capfirst}}</a>
+                    </div>
+                    <div class="post-des">
+                        {{post.content|safe}}
+                        {% if post.image %}
+                        <img class="ui centered image mt-3" src="{{post.image.url}}">
+                        {% endif %}
+                    </div>
+                </div>
+                <hr style="margin: 5px 0 10px 0;">
+                <div class="post-count d-flex justify-content-around">
+                    <h5 class=" text-muted ">Like{{ post.liked.count|pluralize }}:{{ post.liked.count }}</h5>
+                    <h5 class="text-muted mt-0">Comment{{comments.count|pluralize}}:{{comments.count}}</h5>
+                </div>
+                <hr style="margin: -2px 0 10px 0;">
+                <div class="post-likes d-flex justify-content-between">
+                    <div class="ui labeled button ui-like" tabindex="0 ">
+                   {% if user in post.liked.all %}   
+                    <a href="{{ post.get_like_url }}" class="ui" style="color: #4183C4;" ><i class="fas fa-heart"></i>Unlike</a>
+                    {% else %}
+                     <a href="{{ post.get_like_url }}" class="ui"><i class="far fa-heart"></i>Like</a>
+                     {% endif %}
+                    </div>
+                    <div class="ui labeled button ui-like d-inline" data-toggle="collapse" aria-expanded="false" href="#show-hide{{post.slug}}" tabindex="0 ">
+                    <a class="ui left"><i class="far fa-comment"></i>Comments</a>
+                    </div>
+                    <div class="ui labeled button ui-like" tabindex="0 ">
+                    <a class="ui left">  <i class="share square outline icon"></i>Share</a>
+                    </div>
+                </div>
+                {% include 'posts/post_comment.html' %}                
+             </div>       
+              </div>
+              <div style="margin-top: 2rem;"><br></div>
+
+{% endblock %}
+{% block js %}
+<script>
+$('.dropdown ')
+.dropdown({
+    transition: 'scale ',
+    action: 'hide '
+    });
+$('.ui.accordion ')
+.accordion
+    .accordion({
+    selector: {
+    trigger: '.title .icon '
+    }
+});
+</script>
+ {% endblock %}

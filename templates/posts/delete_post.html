@@ -1,0 +1,21 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+ {% block title %} <title>Delete post </title>{% endblock %}
+   {% block content %}
+   {% if request.user == post.author.user %}
+    <div class="col-lg-4 col-md-6 col-sm-12 mx-auto text-center">
+      <div class="delete-post" style="margin-top: 13rem;margin-bottom: 14rem;">
+ <form class="ui form post-form raised segment" method="POST">
+{% csrf_token %} 
+    <p style="font-size: 20px; margin-top:5px" >Are you sure you want to delete <b class="font-weight-bold"  >"{{post.title }}"</b></p> 
+    <button type="submit" class="negative ui button"><i class="trash icon"></i>Yes</button>
+    <a href="{% url 'posts:home' %}"  class="positive ui button item"><i class="delete icon"></i>No</a>
+</form> 
+{% else %}
+{% include 'error/404.html' %}
+{% endif %}
+</div>
+</div>
+{% endblock %}

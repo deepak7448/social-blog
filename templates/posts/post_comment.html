@@ -1,0 +1,97 @@
+ {% load static %}
+ {% load humanize %} 
+ <style>
+ .ui.comments .comment .actions {
+font-size: 14px!important;
+  } 
+  .view-comment h5{
+     cursor: pointer!important;
+  }
+  .view-comment:focus{
+     border: none!important;
+     outline: none!important;
+  }
+ </style>
+ {% if comments %}
+ <div class="view-comment" data-toggle="collapse" aria-expanded="false" href="#show-hide{{post.slug}}" tabindex="0 ">
+<h5 class="text-muted mt-2" style="margin-left: 30px;margin-bottom: 15px;">view all {{comments.count}} comment{{comments.count|pluralize}}</h5>
+</div>
+{% else %}
+<h5 class="text-muted mt-2" style="margin-left: 30px;margin-bottom: 15px;">No comments yet...</h5>
+{% endif %}
+<form action="#{{comment.id}}"  class="ui form mb-4" method="POST">
+   {% csrf_token %}
+   <div class="field d-flex">
+   <img src="{{post.author.profile_pic.url}}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45" style="margin-right: 10px;">
+   <input type="hidden" name="post_id" value="{{post.id}}">
+   <input type="text" name="comment" placeholder="Write a Comment" autocomplete=" off" style="border-radius: 50px;">
+   <button type="submit" class="ui primary basic button ml-2">Post</button>
+   </div>
+   {% comment %}   <!--
+   <!div class="ui blue labeled submit icon button ">
+   <!i class="icon edit "></i> Add Reply
+   </div>--> {% endcomment %}
+   </form>
+<div id="show-hide{{post.slug}}" class="collapse">
+{% comment  %}{% if post.postcomment_set.all %}{% endcomment %} 
+ {% for comment in comments %}
+ <hr>
+ <div class="ui comments dividing">
+<div class="comment" id="{{comment.id}}">
+ <a class="avatar">
+<img src="{{post.author.profile_pic.url}}" class="rounded-circle z-depth-0" alt="avatar image" style="width:35px;height:35px;"></a>
+{% comment %}    <!---- user comment ----> {% endcomment %}
+<div class="content">
+<a href="{{ comment.user.get_profile_url }}" class="author text-muted">{{comment.user}}</a>
+<div class="metadata">
+ <span class="date">{{comment.created_on|naturalday}} at {{comment.created_on|time}}</span>
+</div>
+ <div class="text">
+<p>{{comment.comment}}</p>
+</div>
+<div class="actions">
+<a class="reply" data-toggle="collapse" href="#reply-comment{{post.slug}}{{comment.id}}" aria-expanded="false">Reply</a>
+</div>
+
+{% comment %} comment reply {% endcomment %}
+<div id="reply-comment{{post.slug}}{{comment.id}}" class="collapse">
+<form class="ui form" method="POST">
+   {% csrf_token %}
+<div class="field d-flex" style="margin: 15px 0 15px 0;">
+<img src="{{post.author.profile_pic.url}}" class="rounded-circle z-depth-0" alt="avatar image" width="35" style="margin-right: 10px;">
+<input type="hidden" name="comment_id" value="{{comment.id}}">
+<input type="text" name="comment" placeholder="Write a Reply" autocomplete=" off" style="border-radius: 50px;">
+<button type="submit" class="ui primary basic button ml-2">Post</button>
+</div>
+</form>
+</div>
+{% comment %} end comment reply {% endcomment %}
+
+</div>
+{% comment %}     <!---- end user comment ---->
+<!---- user reply ----> {% endcomment %}
+{% comment %}   <!---- end user reply ----> {% endcomment %}
+{% for reply in comment.replies.all %}
+<div class="comments" style="margin-bottom: -15px;">
+<div class="comment">
+
+<a class="avatar">
+<img src="{{post.author.profile_pic.url}}" class="rounded-circle z-depth-0" alt="avatar image" style="width:25px;height:25px;">
+</a>
+<div class="content">
+<a href="{{ comment.user.get_profile_url }}" class="author text-muted">{{comment.user}}</a>
+<div class="metadata"><span class="date">{{reply.created_on|naturalday}} at {{reply.created_on|time}}</span></div>
+<div class="text">
+   {{reply.comment}}
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+</div>
+{% endfor %}
+
+{% comment  %} {% endif %} {% endcomment %}
+</div>

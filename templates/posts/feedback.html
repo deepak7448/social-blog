@@ -1,0 +1,40 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+   {% block title %} <title>Feedback </title>{% endblock %}
+   {% block content %}
+   <style>
+  label {
+      margin-bottom: 0;
+  }
+  .feedback{
+  margin: 58px;
+}
+.feedback-shadow{
+  -webkit-box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+  box-shadow: 0px 2px 4px 0px rgba(34, 36, 38, 0.12), 0px 2px 10px 0px rgba(34, 36, 38, 0.15);
+  padding: 15px;
+}
+</style>
+       <div class="col-lg-4 col-md-6 col-sm-12 mx-auto feedback">
+        <div class="feedback-shadow">
+       {% if messages %}
+        <div class="alert alert-success alert-dismissible fade show mt-4" id="success-alert">
+         {% for message in messages %}
+           <p class="mb-0">{{message}}</p>
+           {% endfor %}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+           </div>
+           {% endif %}
+      <form method="post" class="ui form">
+       {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="ui primary button ml-2">Submit</button>
+      </form>
+     </div>
+     </div>
+  
+   {% endblock %}

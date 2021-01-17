@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&family=Roboto:wght@100&family=Ubuntu:wght@300&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --main-color: #4481eb;
+    --main-hover: #3166cf;
+    --nav-color: #999999;
+    --white-color: #fff;
+    --back-color: #f2f2f2;
+    --dark-color: #23272b;
+    --black-color: #000;
+    --border: #22242626;
+    --ubuntu-font: 'Ubuntu', sans-serif;
+    --baloo-font: 'Baloo Tamma 2', cursive;
+    --roboto-font: 'Roboto', sans-serif;
+}
+
+p {
+    font-family: var(--baloo-font);
+}
+
+h1,h2,h3,h4 {
+    font-family: var(--ubuntu-font);
+}
+
+.tox .tox-notification--warn, .tox .tox-notification--warning {
+    display: none!important;
+}
+/* ****************************************Navbar***************************** */
+
+.nav-link {
+    font-weight: 600;
+}
+
+.navbar-brand {
+    color: var(--main-color)!important;
+    font-weight: 600;
+    font-family: var(--ubuntu-font);
+    text-transform: uppercase;
+}
+
+.navbar {
+    padding: 10px 25px;
+    background-color: var(--back-color)!important;
+    transition: all 400ms ease-in-out;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--nav-color)!important;
+    font-family: var(--roboto-font);
+    font-size: 17px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+.navbar-nav .nav-link.btn-log {
+    background: var(--main-color);
+    color: #fff!important;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.navbar-nav .nav-link.btn-log:hover {
+    background: var(--main-hover);
+    color: #fff!important;
+}
+
+.navbar-nav .active>.nav-link,
+.navbar-nav .nav-link:hover {
+    transition: all 150ms linear 0s;
+    color: var(--main-hover)!important;
+    -webkit-transition: all 150ms linear 0s;
+    -moz-transition: all 150ms linear 0s;
+    -ms-transition: all 150ms linear 0s;
+    -o-transition: all 150ms linear 0s;
+}
+
+.navbar .drop {
+    padding: 8px 10px;
+    font-family: var(--roboto-font);
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.navbar .drop:not(.active) {
+    color: var(--nav-color);
+}
+
+.drop.show {
+    margin-left: -60px;
+    width: 135px;
+}
+.ui.dropdown > .dropdown.icon {
+    margin: 0 0 0 5px!important;
+}
+
+.ui-search-nav {
+    display: none!important;
+}
+
+.ui.form input[type="search"] {
+    border-radius: 500em 0% 0% 500em;
+    -webkit-border-radius: 500em 0% 0% 500em;
+    -moz-border-radius: 500em 0% 0% 500em;
+    -ms-border-radius: 500em 0% 0% 500em;
+    -o-border-radius: 500em 0% 0% 500em;
+}
+
+.ui .search:focus {
+    border-radius: 500em 0% 0% 500em!important;
+    -webkit-border-radius: 500em 0% 0% 500em!important;
+    -moz-border-radius: 500em 0% 0% 500em!important;
+    -ms-border-radius: 500em 0% 0% 500em!important;
+    -o-border-radius: 500em 0% 0% 500em!important;
+}
+
+.ui .form .search-btn {
+    border-radius: 0% 500em 500em 0%;
+    -webkit-border-radius: 0% 500em 500em 0%;
+    -moz-border-radius: 0% 500em 500em 0%;
+    -ms-border-radius: 0% 500em 500em 0%;
+    -o-border-radius: 0% 500em 500em 0%;
+    background: var(--main-color)!important;
+}
+
+.ui .form .search-btn:hover {
+    background: var(--main-hover)!important;
+}
+@media screen and (max-width: 769px)and (orientation: portrait) {
+    .navbar{padding: 10px;
+    }
+    .ui-search,
+    .pro-img {
+        display: none!important;
+    }
+    .log-btn {
+        padding-top: 7px;
+    }
+    .navbar-dark .navbar-nav .nav-item {
+        margin: 0 0 0 auto;
+    }
+    .ui-search-nav {
+        display: inline-flex!important;
+        width: 100%;
+        padding: 0 5px;
+    }
+    .ui.form input[type="search"] {
+        border-radius: 0;
+        border-bottom: 1px solid var(--main-color)!important;
+        border: none;
+    }
+    .ui .form .search-btn {
+        border-radius: 0;
+    }
+    .ui .form .search-btn:hover {
+        background: var(--main-hover)!important;
+    }
+    .ui .search:focus {
+        border-radius: 0%!important;
+        -webkit-border-radius: 0%!important;
+        -moz-border-radius: 0%!important;
+        -ms-border-radius: 0%!important;
+        -o-border-radius: 0%!important;
+        border-bottom: var(--main-hover);
+    }
+}
+
+/*****************************************End Navbar*****************************************/

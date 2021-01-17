@@ -1,0 +1,162 @@
+  {% extends 'base.html' %}
+   {% load static %}
+   {% load humanize %} 
+   {% load crispy_forms_tags %}
+      {% block title %} <title>Django | Home </title>{% endblock %}
+    {% block css %} 
+     <link rel="stylesheet" href="{% static 'css/post.css' %}">
+    {% endblock %}
+   {% block content %}
+
+    {% comment %}   <!----------------------- start post -----------------------> {% endcomment %}
+
+    {% include 'posts/create_post.html' %}
+   {% comment %}  <!----------------------- End post ----------------------->
+        <!----------------------- post show -----------------------> {% endcomment %}
+       <div class="col-lg-5 col-md-10 col-sm-12 mx-auto">
+         {% for post in page_obj %}
+            <div class="user-posts card mt-5" id="{{post.id}}">
+                <div class="user-post-detail d-flex">
+                    <img src="{{ post.author.profile_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
+                    <div class="user-name-date">
+                        <h3 class="text-muted">
+                            <a href="{{ post.author.get_profile_url }}" class="text-muted title-size"> {{post.author|capfirst}}</a>
+                        </h3>
+                        <p class="text-muted">{{post.created_on|naturalday}} at {{post.created_on|time}}</p>
+                    </div>
+                    {% if request.user == post.author.user %}
+                    <div class="user-post-edit">
+                        <div class="ui buttons">
+                            <div class="ui floating dropdown icon button action-btn">
+                                <i class="ellipsis vertical icon"></i>
+                                <div class="menu">
+                                    <a href="{% url 'posts:update_post' slug=post.slug %}" class="item"><i class="edit icon"></i> Edit Post</a>
+                                    <a href="{% url 'posts:delete_post' slug=post.slug %}" class="item"><i class="trash icon"></i> Remove Post</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr style="margin: 5px 0 10px 0;">
+                <div class="post-section">
+                 <div class="post-title">
+                <a href="{{ post.get_absolute_url }}" class="text-muted title-size card-title">{{post.title|capfirst}}</a>
+                </div>  
+                 <div class="post-des mt-2"> 
+                {{ post.content|safe|truncatewords:100 }}
+             {% if post.image %}
+              <a href="{{ post.get_absolute_url }}">
+                 <img src="{{ post.image.url }}" class='card-img-top ui centered image'/>
+                 </a>
+                {% endif %}
+                </div>
+                </div>
+                <hr style="margin: 5px 0 10px 0;">
+                <div class="post-count d-flex justify-content-around">
+                    <h5 class=" text-muted ">Like{{ post.liked.count|pluralize }}:{{ post.liked.count }} </h5>
+                    <h5 class="text-muted mt-0">Comments:{{post.comment_count}}</h5>
+                </div>
+                <hr style="margin: -2px 0 10px 0;">
+                <div class="post-likes d-flex justify-content-between">
+                    <div class="ui labeled button ui-like" tabindex="0 "> 
+                    {% comment %}
+                    {% if user in post.liked.all %}   
+                    <a href="{{ post.get_like_url }}" class="ui" style="color: #4183C4;" ><i class="fas fa-heart"></i>Unlike</a>
+                    {% else %}
+                     <a href="{{ post.get_like_url }}" class="ui"><i class="far fa-heart"></i>Like</a>
+                     {% endif %}
+                       {% endcomment %}
+                    <form action="{% url 'posts:like' %}#{{post.id}}" method="POST">
+                   {% csrf_token %}
+                    <input type="hidden" name="post_id" value="{{post.id}}">
+                     {% if user in post.liked.all %}  
+                    <button type="submit" class="ui like-btn" style="color: #4183C4!important;" ><i class="fas fa-heart"></i>Unlike</a>
+                     {% else %}
+                    <button type="submit" class="ui like-btn"><i class="far fa-heart"></i>Like</a>
+                     {% endif %}
+                   </form>
+                    </div>
+                    <div class="ui labeled button  ui-like d-inline" data-toggle="collapse" aria-expanded="false"  href="{{ post.get_absolute_url }}" tabindex="0 ">
+                    <a class="ui left" href="{{ post.get_absolute_url }}"> <i class="far fa-comment"></i>Comments</a>
+                    </div>
+                    <div class="ui labeled button  ui-like" tabindex="0 ">
+                  
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" class="ui left"> <i class="share square outline icon"></i>Share</a>
+                    </div>
+                </div>
+          {% comment %}
+           {% include 'posts/post_comment.html' %}
+          {% endcomment %} 
+            </div> 
+             {% endfor%}
+            </div>
+           
+    <div style="margin-top: 2rem;"><br></div>
+     {% if page_obj.has_other_pages %}
+     <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+      </li>
+    {% else %}
+       <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">&laquo;</a>
+    </li>
+    {% endif %}
+    {% for i in page_obj.paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span>
+        </li>
+      {% else %}
+        <li class="page-item">
+        <a class="page-link"href="?page={{ i }}">{{ i }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+       <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+      </li>
+    {% else %}
+        <li class="page-item disabled">
+      <a class="page-link">&raquo;</a>
+    </li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock %}
+        
+    {% comment %}     <!----------------------- end post show ----------------------->
+
+        <!-----------------------end post show with image -----------------------> {% endcomment %}
+
+
+{% block js %}
+<script>
+{% comment %} 
+$(document).ready(function(){
+$('input[type=file]').change(function(){
+if($('input[type=file]').val()==''){
+    $('button').attr('disabled',true)
+} 
+else{
+    $('button').attr('disabled',false);
+}
+})
+}); 
+{% endcomment %}
+$(document).ready(function () {
+    $('input[type="submit"]').attr('disabled', true);
+    $('textarea').on('keyup', function () {
+        var file_img = $('input[name="image"]').val();
+        var text_title = $('#content').val();
+        if (text_title != '' || file_img != '') {
+            $('button').attr('disabled', false);
+        } else {
+            $('button').attr('disabled', true);
+        }
+    });
+});
+</script>
+{% endblock %}

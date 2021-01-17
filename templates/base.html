@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+   {% block title %} {% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel = "icon" href = "{% static 'img/djngo.svg' %} " type = "image/x-icon"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+  
+ {% include 'navbar.html' %} 
+ {% block content %} 
+ 
+ {% endblock %}
+      
+  {% include 'footer.html' %} 
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js "></script>
+    <!script type="text/javascript" src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+     <!script src='https://cdn.tiny.cloud/1/q56c5z58vvxe4hmj27u8drd4hubvmzti354p8u1r3gbt7enz/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/jncy9uua3vae233ksjttyjys8mohh57wv0xwa3hk7uioqvhh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/jncy9uua3vae233ksjttyjys8mohh57wv0xwa3hk7uioqvhh/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+    {% comment%}
+    tinymce.init({
+    selector: '#content',
+    mode: "textareas",
+    plugins: "emoticons",
+    toolbar: 'emoticons',
+});
+ {% endcomment %}
+ $('textarea#content').tinymce({
+    plugins: "emoticons",
+    toolbar: 'emoticons',
+    });
+$('.dropdown ')
+.dropdown({
+    transition: 'scale ',
+    action: 'hide '
+    });
+{% comment %} $('.ui.accordion ')
+.accordion
+    .accordion({
+    selector: {
+    trigger: '.title .icon '
+    }
+}); {% endcomment %}
+</script>
+    {% block js %} {% endblock %}
+</body>
+
+</html>

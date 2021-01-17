@@ -1,0 +1,62 @@
+<div class="col-lg-5 col-md-10 col-sm-12 mx-auto">
+<div class="ui post-btn">
+<div class="content d-flex">
+{% comment %}
+<div class="left floated user-pic">
+<img src="{{ user.profiles.profile_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image">
+</div>
+{% endcomment %}
+<button type=" button " class="btn btn-primary modal-btn" data-toggle="modal" data-target="#post-modal">
+Write something here...
+</button>
+{% comment %}   <!-- Modal --> {% endcomment %}
+<div class="modal fade" id="post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="myModalLabel">Create Post</h5>
+<button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true ">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<div class="post">
+{% comment %}
+<img src="{{ request.user.profiles.profile_pic.url }}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
+{% endcomment %}
+<p class="user-name ">{{user.username|capfirst}}</p>
+{% if not user.is_authenticated %}
+<div class="alert alert-warning alert-dismissible fade show mt-4 text-center">
+<a href="{% url 'account_login' %}" class="mb-0 " style="color: #856404;">
+Please log in to continue</a>
+</div>
+{% endif %}
+</div>
+<div class="content">
+<div class="description">
+<form class="ui form post-form" id="create-post" method="POST" enctype="multipart/form-data">
+{% csrf_token %} 
+<div class="field">
+<label for="title">Title</label>
+{{form.title}}
+</div>
+<div class="field">
+<label for="post"> Write something here...</label>
+{{form.content}}
+</div>
+{{form.image}}
+{% if user.is_authenticated %}
+<button type="submit" class="positive ui button" id="btn-post" style="font-size: 15px;border-radius:0">Post</button>
+{% else %}
+<button type="submit" class="positive ui button disabled" style="font-size: 15px;border-radius:0">Post</button>
+{% endif %}
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

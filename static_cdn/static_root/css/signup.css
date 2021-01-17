@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+2|Inconsolata|Merriweather|PT+Sans|Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+* {
+    padding: 0%;
+    margin: 0%;
+}
+a,li{
+    font-family: var(--baloo-font);
+}
+h4 {
+font-family: var(--ubuntu-font);
+font-size: 20px;
+}
+.btn{
+margin: 0;
+padding: .5rem 1rem;
+border-radius: .125rem;
+}
+.btn-success{
+  background: var(--main-color)!important;
+  border: 1px solid var(--main-color)!important;
+}
+.btn-success:hover {
+  background-color: var(--white-color)!important;
+  color: var(--main-color)!important;
+  border-color: var(--main-color);
+}
+.btn:focus {
+-webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.account_form{
+margin-top: 7.5rem;
+border-radius: 2%
+}
+.account_img img{
+width: 100%;
+height: 100px;
+margin-top: -50px;
+}
+.account-login{
+padding: 0 15px;
+}
+.form-control:focus {
+border-color: none;
+outline: 0;
+-webkit-box-shadow: none;
+box-shadow: none;
+background: transparent;
+border-bottom: 1px solid var(--main-color);
+border-radius: 0;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+-ms-border-radius: 0;
+-o-border-radius: 0;
+}
+.form-control{
+border: none;
+background: transparent;
+border-radius: 0;
+padding-left: 2rem;
+border-bottom: 1px solid #ced4da;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+-ms-border-radius: 0;
+-o-border-radius: 0;
+}
+.was-validated .form-control:valid:focus,
+.was-validated .form-control:invalid:focus {
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+.was-validated .form-check-input:valid ~ .form-check-label {
+color: var(--black-color);
+}
+.was-validated .form-control:valid{
+  background-image: none;
+}
+.form-control.is-invalid:focus{
+  border-color: #dc3545;
+box-shadow: none;
+}
+.errorlist{
+  list-style: none;
+  border-top: 1px solid #dc3545;
+  margin-top: -1px;
+}
+.errorlist li{
+  font-size: 82%;
+  color: #dc3545;
+  line-height: 2;
+  font-weight:700;
+}
+.account{
+position: relative;
+}
+.account-icon{
+position: absolute;
+line-height: 1;
+margin: 10px 5px;
+color:var(--main-color);
+text-align: center;
+}

@@ -1,0 +1,67 @@
+{% load static %} 
+ <div>
+    <nav class="mb-1 navbar navbar-expand-md navbar-dark">
+        <a class="navbar-brand" href="{% url 'posts:home' %}">django</a>
+         {% if user.is_authenticated %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation" style="
+    background: white;
+    border-radius: 50em;
+    padding-right: 0;">
+        {% comment  %}
+        <img src="{% static 'img/male.svg' %}" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
+         {% endcomment %}
+    <a class="navbar-brand" style="font-size: 25px;">{{user.username|slice:":1"}}</a>
+    {% else %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+     <img src="{% static 'img/male.svg' %}" class="rounded-circle z-depth-0" alt="avatar image" height="40" width="40">
+    {% endif %}
+       </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+                <div class="ui action input ui-search">
+                    <form class="ui form" method="get" action="{% url 'posts:search' %}" style="display: contents;">
+                        <input type="search" name="q" class="search prompt" placeholder="Search..." value="{{query}}" required>
+                        <button type="submit" class="ui button search-btn"><i class="fas fa-search" style="color: #fff;"></i></button>
+                    </form>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'posts:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'posts:feedback' %}">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    {% comment  %}
+                    <img src="{{ user.profiles.profile_pic.url }}" class="rounded-circle z-depth-0 pro-img" alt="avatar image" height="45" width="45">
+                     {% endcomment %}
+                        <div class="item drop nav-item">
+                            <div class="ui floating dropdown title" style="margin-top: 5px;">
+                            {{request.user.username|title}}
+                                <i class="dropdown icon"></i>
+                                <div class="menu">
+                                    <a href="{% url 'profile:profiles' user.username %}" class="item">view Profile</a>
+                                    <a  href="{% url 'account_change_password' %}" class="item">Edit Password</a>
+                                    <a  href="{% url 'account_email' %}" class="item">Edit E-mail</a>
+                                </div>
+                             </div>
+                        </div>
+                      <li class="nav-item log-btn" style="padding-left: 7px;">
+                        <a class="nav-link btn-log" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                      {% else %}
+                    <li class="nav-item log-btn" style="padding-left: 7px;">
+                        <a class="nav-link btn-log" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                      {% endif %}
+                </ul>
+        </nav>
+        <div class="ui action input ui-search-nav">
+            <form class="ui form" action="{% url 'posts:search' %}" method="get" style="display: contents;">
+                <input type="search" name="q" class="search prompt" placeholder="Search..." value="{{query}}" required>
+                <button type="submit" class="ui button search-btn"><i class="fas fa-search" style="color: #fff;"></i></button>
+            </form>
+        </div>
+        </div>
