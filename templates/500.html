@@ -1,32 +1,43 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block title %} <title>500 Internal Server Error!</title>{% endblock %}
-{% block content %}
-<style>
-  .page_500{
-    padding:40px 0;
-    background:#fff; 
-    font-family: 'Arvo', serif;
-}
+<!doctype html>
+<html lang="en">
 
-.page_404  img{ width:100%;}
-
-.four_zero_four_bg{
- 
- background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;
- }
- .four_zero_four_bg h1{
- font-size:80px;
- }
- .four_zero_four_bg h3{
-	font-size:80px;
-}			 
-.contant_box_404{ 
-  margin-top:-50px;
-}
-</style>
+<head>
+    <title>500 Internal Server Error!
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel = "icon" href = "{% static 'img/djngo.svg' %} " type = "image/x-icon"> 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css">
+    <style>
+       .page_500{
+        padding:40px 0;
+        background:#fff; 
+        font-family: 'Arvo', serif;
+        }
+       .page_404  img{
+         width:100%;
+          }
+        .four_zero_four_bg{
+          background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+          height: 400px;
+          background-position: center;
+          }
+         .four_zero_four_bg h1{
+           font-size:80px;
+           }
+          .four_zero_four_bg h3{
+	    font-size:80px;
+           }			 
+          .contant_box_404{ 
+           margin-top:-50px;
+           }
+         </style>
+</head>
+<body>
 <section class="page_500">
 	<div class="container">
 		<div class="row">	
@@ -49,4 +60,10 @@
 		</div>
 	</div>
 </section>
-{% endblock %}
+<script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js "></script>
+    <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js "></script>
+    </body>
+</html>
