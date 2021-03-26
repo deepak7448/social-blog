@@ -144,9 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'social-blog',
-    'API_KEY': '628728632466762',
-    'API_SECRET': 'EspiWcgcD3CVlRapNFWObpHNZiE'
+    'CLOUD_NAME': 'CLOUD_NAME',
+    'API_KEY': 'API_KEY',
+    'API_SECRET': 'API_SECRET'
 }
 
 
@@ -168,8 +168,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'prajapatideepak244@gmail.com'
-EMAIL_HOST_PASSWORD = 'Deepak@7448'
+EMAIL_HOST_USER = 'YOUR_EMAIL_ID'
+EMAIL_HOST_PASSWORD = 'YOUR_EMAIL_PASSWORD'
 
 
 
